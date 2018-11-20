@@ -95,10 +95,10 @@ class GeoLocationController implements ContainerInjectableInterface
         $title = "IP Locator";
         $request = $this->di->get("request");
         $page = $this->di->get("page");
-        $ip = $request->getPost("ip_address");
+        $ipAddress = $request->getPost("ip_address");
 
-        $valid = $this->validator->validateIp($ip);
-        $location = $this->locator->getLocation($ip);
+        $valid = $this->validator->validateIp($ipAddress);
+        $location = $this->locator->getLocation($ipAddress);
 
         $data = array_merge($valid, $location);
 

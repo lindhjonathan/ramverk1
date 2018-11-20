@@ -14,19 +14,19 @@ class Validator
      * @param string ip-address
      * @return array
      */
-    static public function validateIp($ip) : array
+    public static function validateIp($ipAddress) : array
     {
         //valideringslogik
         $hostname = "undefined host";
 
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            $result = $ip . " is a valid IPv6 Address.";
-            $hostname = gethostbyaddr($ip);
-        } else if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            $result = $ip . " is a valid IPv4 Address.";
-            $hostname = gethostbyaddr($ip);
+        if (filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+            $result = $ipAddress . " is a valid IPv6 Address.";
+            $hostname = gethostbyaddr($ipAddress);
+        } else if (filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            $result = $ipAddress . " is a valid IPv4 Address.";
+            $hostname = gethostbyaddr($ipAddress);
         } else {
-            $result = $ip . " is not a valid IP Address.";
+            $result = $ipAddress . " is not a valid IP Address.";
         }
         $data = [
             "result" => $result,

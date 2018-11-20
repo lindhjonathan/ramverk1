@@ -12,6 +12,8 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/IP</directory>
             <directory suffix=".php">src/Page</directory>
+            <directory suffix=".php">src/Geo</directory>
+            <directory suffix=".php">src/Models</directory>
             <!-- <directory suffix=".php">src</directory> -->
         </whitelist>
     </filter>

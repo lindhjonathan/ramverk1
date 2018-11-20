@@ -11,7 +11,7 @@ class Locator
      * Private $access_key contains key to third party API - ipstack.com
      */
 
-    private $access_key = "26ac05fc6257e7fc03c369cec5552b0a";
+    private $accessKey = "26ac05fc6257e7fc03c369cec5552b0a";
 
     /**
      * calls ipstack with ip parameter
@@ -19,22 +19,22 @@ class Locator
      * @param string ip-address
      * @return array
      */
-    public function getLocation($ip) : array
+    public function getLocation($ipAddress) : array
     {
-        $ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$this->access_key.'');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $apiCall = curl_init('http://api.ipstack.com/'.$ipAddress.'?access_key='.$this->accessKey.'');
+        curl_setopt($apiCall, CURLOPT_RETURNTRANSFER, true);
 
-        $json = curl_exec($ch);
-        curl_close($ch);
+        $json = curl_exec($apiCall);
+        curl_close($apiCall);
 
-        $api_result = json_decode($json, true);
+        $apiResult = json_decode($json, true);
         $filtered = [
-            "ip"           => $api_result["ip"],
-            "type"         => $api_result["type"],
-            "country_name" => $api_result["country_name"],
-            "city"         => $api_result["city"],
-            "latitude"     => $api_result["latitude"],
-            "longitud"     => $api_result["longitude"]
+            "ip"           => $apiResult["ip"],
+            "type"         => $apiResult["type"],
+            "country_name" => $apiResult["country_name"],
+            "city"         => $apiResult["city"],
+            "latitude"     => $apiResult["latitude"],
+            "longitud"     => $apiResult["longitude"]
         ];
 
         return $filtered;

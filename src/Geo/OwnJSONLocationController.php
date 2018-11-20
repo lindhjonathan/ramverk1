@@ -69,7 +69,6 @@ class OwnJSONLocationController implements ContainerInjectableInterface
         $location = $this->locator->getLocation($value);
 
         $json = array_merge($valid, $location);
-        $title = "JSON IP Validator";
         return [$json];
     }
 
@@ -80,12 +79,11 @@ class OwnJSONLocationController implements ContainerInjectableInterface
      */
     public function locateActionPost() : array
     {
-        $title = "IP Validator";
         $request = $this->di->get("request");
-        $ip = $request->getPost("ip_address");
+        $ipAddress = $request->getPost("ip_address");
 
-        $valid = $this->validator->validateIp($ip);
-        $location = $this->locator->getLocation($ip);
+        $valid = $this->validator->validateIp($ipAddress);
+        $location = $this->locator->getLocation($ipAddress);
 
         $json = array_merge($valid, $location);
 
