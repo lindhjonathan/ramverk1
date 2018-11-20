@@ -41,7 +41,40 @@ return [
         [
             "text" => "IP",
             "url" => "ip",
-            "title" => "IP Adress validator",
+            "title" => "IP Address validator",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Validator",
+                        "url" => "ip/index",
+                        "title" => "IP Validator",
+                    ],
+                    [
+                        "text" => "JSON Validator",
+                        "url" => "ip/json",
+                        "title" => "JSON REST API IP Validator",
+                    ],
+                ],
+            ],
+        ],
+        [
+            "text" => "Geolocation",
+            "url" => "geo",
+            "title" => "IP Geo locator",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Geolocator",
+                        "url" => "geo/index",
+                        "title" => "IP Geo Locator",
+                    ],
+                    [
+                        "text" => "JSON Locator",
+                        "url" => "geo/json",
+                        "title" => "JSON REST API Geo Locator",
+                    ],
+                ],
+            ],
         ],
         [
             "text" => "Verktyg",

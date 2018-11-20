@@ -1,15 +1,17 @@
 <?php
 
-namespace Anax\ip;
+namespace Anax\Geo;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+use Anax\Models\Validator;
+use Anax\Models\Locator;
 
 /**
  * Style chooser controller loads available stylesheets from a directory and
  * lets the user choose the stylesheet to use.
  */
-class IpAddressController implements ContainerInjectableInterface
+class GeoLocationController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -17,6 +19,8 @@ class IpAddressController implements ContainerInjectableInterface
      * @var string $db a sample member variable that gets initialised
      */
     private $db = "not active";
+    private $validator;
+    private $locator;
 
     /**
      * The initialize method is optional and will always be called before the
@@ -29,6 +33,8 @@ class IpAddressController implements ContainerInjectableInterface
     {
         // Use to initialise member variables.
         $this->db = "active";
+        $this->validator = new Validator();
+        $this->locator = new Locator();
     }
 
 
@@ -40,11 +46,15 @@ class IpAddressController implements ContainerInjectableInterface
      */
     public function indexAction() : object
     {
-        $title = "IP Validator";
+        $title = "IP Locator";
+        $request = $this->di->get("request");
+
+        $data = [
+            "userIp" => $request->getServer("REMOTE_ADDR"),
+        ];
 
         $page = $this->di->get("page");
-
-        $page->add("anax/ip/index");
+        $page->add("anax/geo/index", $data);
 
         return $page->render([
             "title" => $title,
@@ -52,17 +62,21 @@ class IpAddressController implements ContainerInjectableInterface
     }
 
     /**
-     * Display json with input form
+     * Display index with json input form
      *
      * @return object
      */
     public function jsonAction() : object
     {
-        $title = "JSON IP Validator";
+        $title = "JSON IP Locator";
+        $request = $this->di->get("request");
+
+        $data = [
+            "userIp" => $request->getServer("REMOTE_ADDR"),
+        ];
 
         $page = $this->di->get("page");
-
-        $page->add("anax/ip/json");
+        $page->add("anax/geo/json", $data);
 
         return $page->render([
             "title" => $title,
@@ -72,35 +86,23 @@ class IpAddressController implements ContainerInjectableInterface
 
 
     /**
-     * POST to see if input is a valid ipv4/ipv6 address
+     * POST form processing, get ip and lookup location
      *
      * @return object
      */
-    public function validateActionPost() : object
+    public function locatorActionPost() : object
     {
-        $title = "IP Validator";
-        //$response = $this->di->get("response");
+        $title = "IP Locator";
         $request = $this->di->get("request");
         $page = $this->di->get("page");
-        $key = $request->getPost("ip_address");
-        $hostname = "undefined host";
+        $ip = $request->getPost("ip_address");
 
-        if (filter_var($key, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            $result = $key . " is a valid IPv6 Address.";
-            $hostname = gethostbyaddr($key);
-        } else if (filter_var($key, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            $result = $key . " is a valid IPv4 Address.";
-            $hostname = gethostbyaddr($key);
-        } else {
-            $result = $key . " is not a valid IP Address.";
-        }
+        $valid = $this->validator->validateIp($ip);
+        $location = $this->locator->getLocation($ip);
 
-        $data = [
-            "result" => $result,
-            "hostname" => $hostname
-        ];
+        $data = array_merge($valid, $location);
 
-        $page->add("anax/ip/validate", $data);
+        $page->add("anax/geo/locator", $data);
 
         return $page->render([
             "title" => $title,

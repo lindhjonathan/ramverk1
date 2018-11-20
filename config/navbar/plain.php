@@ -29,6 +29,11 @@ return [
             "title" => "IP Adress validator",
         ],
         [
+            "text" => "Geolocation",
+            "url" => "geo",
+            "title" => "IP Adress Locator",
+        ],
+        [
             "text" => "Verktyg",
             "url" => "verktyg",
             "title" => "Verktyg och möjligheter för utveckling.",

@@ -34,7 +34,7 @@ class OwnJSONController implements ContainerInjectableInterface
 
 
     /**
-     * Display the stylechooser with details on current selected style.
+     * Display index resultset in JSON format
      *
      * @return array
      */
