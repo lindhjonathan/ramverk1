@@ -19,7 +19,7 @@ namespace Anax\View;
         <legend>JSON IP Address Validator</legend>
         <p>
             <label for="ip_address">Input an IP Address to locate<br>
-                <input type="text" name="ip_address" placeholder="<?= $userIp ?>">
+                <input type="text" name="ip_address" value="<?= $userIp ?>">
                 <input type="submit" name="doit" value="Locate">
             </label>
         </p>

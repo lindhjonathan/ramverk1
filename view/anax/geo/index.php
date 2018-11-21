@@ -18,7 +18,7 @@ namespace Anax\View;
         <legend>IP Geo Location</legend>
         <p>
             <label for="ip_address">Input an IP Address to get location<br>
-                <input type="text" name="ip_address" placeholder="<?= $userIp ?>">
+                <input type="text" name="ip_address" value="<?= $userIp ?>">
                 <input type="submit" name="doit" value="Locate">
             </label>
         </p>
