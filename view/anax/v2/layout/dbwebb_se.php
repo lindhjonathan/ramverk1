@@ -71,6 +71,7 @@ $route = "route-" . str_replace("/", "-", $di->get("request")->getRoute());
         <?php foreach ($stylesheets as $stylesheet) : ?>
             <link rel="stylesheet" type="text/css" href="<?= asset($stylesheet) ?>">
         <?php endforeach; ?>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
     <?php endif; ?>
 
     <?php if (isset($style)) : ?>

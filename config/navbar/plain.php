@@ -34,6 +34,11 @@ return [
             "title" => "IP Adress Locator",
         ],
         [
+            "text" => "Weather",
+            "url" => "weather",
+            "title" => "Weather Service",
+        ],
+        [
             "text" => "Verktyg",
             "url" => "verktyg",
             "title" => "Verktyg och möjligheter för utveckling.",
