@@ -30,6 +30,11 @@ return [
                         "url" => "redovisning/kmom02",
                         "title" => "Redovisning för kmom02.",
                     ],
+                    [
+                        "text" => "Kmom03",
+                        "url" => "redovisning/kmom03",
+                        "title" => "Redovisning för kmom03.",
+                    ],
                 ],
             ],
         ],
@@ -72,6 +77,25 @@ return [
                         "text" => "JSON Locator",
                         "url" => "geo/json",
                         "title" => "JSON REST API Geo Locator",
+                    ],
+                ],
+            ],
+        ],
+        [
+            "text" => "Weather",
+            "url" => "weather",
+            "title" => "Weather Service",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Weather Forecast",
+                        "url" => "weather/index",
+                        "title" => "Weather Forecast",
+                    ],
+                    [
+                        "text" => "JSON Weather",
+                        "url" => "weather/json",
+                        "title" => "JSON REST API Weather Service",
                     ],
                 ],
             ],
