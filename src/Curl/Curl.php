@@ -86,7 +86,7 @@ class Curl
         $data = array();
         $today = time();
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $url = 'https://api.darksky.net/forecast/'.$this->weatherKey.'/'.$lat.','.$long.','.$today.'?units=si&lang=sv&exclude=minutely';
             array_push($data, $url);
             $today -= 24*60*60;
