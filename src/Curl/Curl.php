@@ -95,12 +95,6 @@ class Curl
         // Call multi-curl function with populated url array
         $res = $this->multi($data);
 
-        // if (in_array(400, $res[0])) {
-        //     if ($res[0]["code"] === 400) {
-        //         return $res[0];
-        //     }
-        // }
-
         $filtered = [];
         for ($i = 0; $i < count($res); $i++) {
             $filtered[$i]["summary"] = $res[$i]["currently"]["summary"];
