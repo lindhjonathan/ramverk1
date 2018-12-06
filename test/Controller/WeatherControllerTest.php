@@ -1,6 +1,6 @@
 <?php
 
-namespace Anax\Weather;
+namespace Jodn14\Weather;
 
 use Anax\DI\DIFactoryConfig;
 use PHPUnit\Framework\TestCase;
@@ -72,15 +72,33 @@ class WeatherControllerTest extends TestCase
     public function testforecastActionPost()
     {
         $request = $this->di->get("request");
-        $request->setPost("userInput", "69.89.31.226");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "userInput" => "69.89.31.226",
+                ]
+            ]
+        );
         $resIP = $this->controller->forecastActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("userInput", "Karlskrona");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "userInput" => "Karlskrona",
+                ]
+            ]
+        );
         $resCity = $this->controller->forecastActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("userInput", "aoiwdnnndn23fail");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "userInput" => "aoiwdnnndn23fail",
+                ]
+            ]
+        );
         $resFail = $this->controller->forecastActionPost();
 
         $bodyIP = $resIP->getBody();
@@ -103,15 +121,33 @@ class WeatherControllerTest extends TestCase
     public function testpastActionPost()
     {
         $request = $this->di->get("request");
-        $request->setPost("userInput", "69.89.31.226");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "userInput" => "69.89.31.226",
+                ]
+            ]
+        );
         $resIP = $this->controller->pastActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("userInput", "Karlskrona");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "userInput" => "Karlskrona",
+                ]
+            ]
+        );
         $resCity = $this->controller->pastActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("userInput", "aoiwdnnndn23fail");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "userInput" => "aoiwdnnndn23fail",
+                ]
+            ]
+        );
         $resFail = $this->controller->pastActionPost();
 
         $bodyIP = $resIP->getBody();

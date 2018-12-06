@@ -1,11 +1,11 @@
 <?php
 
-namespace Anax\Weather;
+namespace Jodn14\Weather;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Anax\Models\Validator;
-use Anax\Models\Locator;
+use Jodn14\Models\Validator;
+use Jodn14\Models\Locator;
 
 /**
  * Json Locator Controller. Validates and gets location data from third part api(ipstack)

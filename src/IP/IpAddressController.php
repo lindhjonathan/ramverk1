@@ -4,6 +4,7 @@ namespace Anax\ip;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+use Jodn14\Models\Validator;
 
 /**
  * Style chooser controller loads available stylesheets from a directory and
@@ -17,6 +18,7 @@ class IpAddressController implements ContainerInjectableInterface
      * @var string $db a sample member variable that gets initialised
      */
     private $db = "not active";
+    private $validator;
 
     /**
      * The initialize method is optional and will always be called before the
@@ -29,6 +31,7 @@ class IpAddressController implements ContainerInjectableInterface
     {
         // Use to initialise member variables.
         $this->db = "active";
+        $this->validator = new Validator();
     }
 
 
@@ -83,22 +86,9 @@ class IpAddressController implements ContainerInjectableInterface
         $request = $this->di->get("request");
         $page = $this->di->get("page");
         $key = $request->getPost("ip_address");
-        $hostname = "undefined host";
 
-        if (filter_var($key, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            $result = $key . " is a valid IPv6 Address.";
-            $hostname = gethostbyaddr($key);
-        } else if (filter_var($key, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            $result = $key . " is a valid IPv4 Address.";
-            $hostname = gethostbyaddr($key);
-        } else {
-            $result = $key . " is not a valid IP Address.";
-        }
 
-        $data = [
-            "result" => $result,
-            "hostname" => $hostname
-        ];
+        $data = $this->validator->validateIp($key);
 
         $page->add("anax/ip/validate", $data);
 

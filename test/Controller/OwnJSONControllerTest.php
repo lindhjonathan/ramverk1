@@ -71,9 +71,9 @@ class OwnJSONControllerTest extends TestCase
         $exp4 = "is a valid IPv4 Address.";
         $exp6 = "is a valid IPv6 Address.";
         $expFail = "is not a valid IP Address.";
-        $this->assertContains($exp4, $json4["message"]);
-        $this->assertContains($exp6, $json6["message"]);
-        $this->assertContains($expFail, $jsonFail["message"]);
+        $this->assertContains($exp4, $json4["result"]);
+        $this->assertContains($exp6, $json6["result"]);
+        $this->assertContains($expFail, $jsonFail["result"]);
     }
 
     /**
@@ -82,15 +82,33 @@ class OwnJSONControllerTest extends TestCase
     public function testvalidateActionPost()
     {
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "255.255.255.255");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "69.89.31.226",
+                ]
+            ]
+        );
         $res4 = $this->controller->validateActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "2001:6b0:2a:c280:487c:27f8:34d6:1435");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "2001:6b0:2a:c280:487c:27f8:34d6:1435",
+                ]
+            ]
+        );
         $res6 = $this->controller->validateActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "255.255.255.252627");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "255.255.255.252627",
+                ]
+            ]
+        );
         $resF = $this->controller->validateActionPost();
 
         $this->assertInternalType("array", $res4);

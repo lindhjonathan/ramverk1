@@ -4,6 +4,7 @@ namespace Anax\IP;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+use Jodn14\Models\Validator;
 
 /**
  * Style chooser controller loads available stylesheets from a directory and
@@ -17,6 +18,7 @@ class OwnJSONController implements ContainerInjectableInterface
      * @var string $db a sample member variable that gets initialised
      */
     private $db = "not active";
+    private $validator;
 
     /**
      * The initialize method is optional and will always be called before the
@@ -29,6 +31,7 @@ class OwnJSONController implements ContainerInjectableInterface
     {
         // Use to initialise member variables.
         $this->db = "active";
+        $this->validator = new Validator();
     }
 
 
@@ -59,24 +62,13 @@ class OwnJSONController implements ContainerInjectableInterface
      */
     public function validateActionGet($value) : array
     {
-        $hostname = "undefined host";
-
-        if (filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            $result = $value . " is a valid IPv6 Address.";
-            $hostname = gethostbyaddr($value);
-        } else if (filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            $result = $value . " is a valid IPv4 Address.";
-            $hostname = gethostbyaddr($value);
-        } else {
-            $result = $value . " is not a valid IP Address.";
-        }
+        $data = $this->validator->validateIp($value);
         // Deal with the action and return a response.
         $title = "JSON IP Validator";
-        $json = [
+        $info = [
             "title" => $title,
-            "message" => $result,
-            "hostname" => $hostname
         ];
+        $json = array_merge($info, $data);
         return [$json];
     }
 
@@ -90,23 +82,13 @@ class OwnJSONController implements ContainerInjectableInterface
         $title = "IP Validator";
         $request = $this->di->get("request");
         $key = $request->getPost("ip_address");
-        $hostname = "undefined host";
+        $data = $this->validator->validateIp($key);
 
-        if (filter_var($key, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            $result = $key . " is a valid IPv6 Address.";
-            $hostname = gethostbyaddr($key);
-        } else if (filter_var($key, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            $result = $key . " is a valid IPv4 Address.";
-            $hostname = gethostbyaddr($key);
-        } else {
-            $result = $key . " is not a valid IP Address.";
-        }
-
-        $json = [
+        $info = [
             "title" => $title,
-            "result" => $result,
-            "hostname" => $hostname
         ];
+
+        $json = array_merge($info, $data);
 
         return [$json];
     }

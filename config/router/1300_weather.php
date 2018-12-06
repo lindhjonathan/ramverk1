@@ -7,7 +7,7 @@ return [
         [
             "info" => "Weather Service",
             "mount" => "weather",
-            "handler" => "\Anax\Weather\WeatherController",
+            "handler" => "\Jodn14\Weather\WeatherController",
         ],
     ]
 ];

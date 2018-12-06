@@ -71,15 +71,33 @@ class IpAddressControllerTest extends TestCase
     public function testvalidateActionPost()
     {
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "255.255.255.255");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "69.89.31.226",
+                ]
+            ]
+        );
         $res4 = $this->controller->validateActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "2001:6b0:2a:c280:487c:27f8:34d6:1435");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "2001:6b0:2a:c280:487c:27f8:34d6:1435",
+                ]
+            ]
+        );
         $res6 = $this->controller->validateActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "255.255.255.252627");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "255.255.255.252627",
+                ]
+            ]
+        );
         $resF = $this->controller->validateActionPost();
 
         $expFhost  = "undefined host";

@@ -26,7 +26,6 @@ return [
             ],
         ],
     ],
-
     // These views are always loaded into the collection of views.
     "views" => [
         [
@@ -62,28 +61,6 @@ return [
                 "navbarConfig" => require __DIR__ . "/navbar/responsive.php",
             ],
         ],
-        // [
-        //     "region" => "footer",
-        //     "template" => "anax/v2/columns/multiple_columns",
-        //     "data" => [
-        //         "class"  => "footer-column",
-        //         "columns" => [
-        //             [
-        //                 "template" => "anax/v2/block/default",
-        //                 "contentRoute" => "block/footer-col-1",
-        //             ],
-        //             [
-        //                 "template" => "anax/v2/block/default",
-        //                 "contentRoute" => "block/footer-col-2",
-        //             ],
-        //             [
-        //                 "template" => "anax/v2/block/default",
-        //                 "contentRoute" => "block/footer-col-3",
-        //             ]
-        //         ]
-        //     ],
-        //     "sort" => 1
-        // ],
         [
             "region" => "footer",
             "template" => "anax/v2/block/default",

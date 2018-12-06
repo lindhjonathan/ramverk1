@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test the OwnJsonController.
  */
-class OwnJSONControllerTest extends TestCase
+class OwnJSONLocationControllerTest extends TestCase
 {
 
     // Create the di container.
@@ -85,15 +85,33 @@ class OwnJSONControllerTest extends TestCase
     public function testlocateActionPost()
     {
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "69.89.31.226");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "69.89.31.226",
+                ]
+            ]
+        );
         $res4 = $this->controller->locateActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "2001:6b0:2a:c280:487c:27f8:34d6:1435");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "2001:6b0:2a:c280:487c:27f8:34d6:1435",
+                ]
+            ]
+        );
         $res6 = $this->controller->locateActionPost();
 
         $request = $this->di->get("request");
-        $request->setPost("ip_address", "255.255.255.252627");
+        $request->setGlobals(
+            [
+                "post" => [
+                    "ip_address" => "255.255.255.252627",
+                ]
+            ]
+        );
         $resF = $this->controller->locateActionPost();
 
         $this->assertInternalType("array", $res4);

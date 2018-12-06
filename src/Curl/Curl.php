@@ -1,5 +1,5 @@
 <?php
-namespace Anax\Curl;
+namespace Jodn14\Curl;
 
 /**
  * Class for wrapping curl.

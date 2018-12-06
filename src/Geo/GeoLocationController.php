@@ -4,8 +4,8 @@ namespace Anax\Geo;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Anax\Models\Validator;
-use Anax\Models\Locator;
+use Jodn14\Models\Validator;
+use Jodn14\Models\Locator;
 
 /**
  * Style chooser controller loads available stylesheets from a directory and
