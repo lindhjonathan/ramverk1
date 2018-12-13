@@ -39,6 +39,11 @@ return [
             "title" => "Weather Service",
         ],
         [
+            "text" => "Books",
+            "url" => "book",
+            "title" => "Bokdatabas",
+        ],
+        [
             "text" => "Verktyg",
             "url" => "verktyg",
             "title" => "Verktyg och möjligheter för utveckling.",
